@@ -692,7 +692,11 @@ public class RNFirebaseNotificationManager {
       }
 
       if (interval == null) {
-        promise.reject("notification/schedule_notification_error", "Invalid interval");
+        if (promise == null) {
+          Log.e(TAG, "Invalid interval");
+        } else {
+          promise.reject("notification/schedule_notification_error", "Invalid interval");
+        }
         return;
       }
 
@@ -707,6 +711,8 @@ public class RNFirebaseNotificationManager {
       }
     }
 
-    promise.resolve(null);
+    if (promise != null) {
+      promise.resolve(null);
+    }
   }
 }
